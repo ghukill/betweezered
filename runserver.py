@@ -59,11 +59,11 @@ if __name__ == '__main__':
 	print "Listening on",localConfig.betweezered_app_port
 
 	# looping listener for rq consumer
-	# with Connection():
-	# 	qs = map(Queue, sys.argv[1:]) or [Queue()]
-	# 	w = Worker(qs)
-	# 	lc = LoopingCall(w.work())
-	# 	lc.start(.1)
+	con = Connection()
+	qs = map(Queue, sys.argv[1:]) or [Queue(connection=con.gen.next())]
+	w = Worker(qs)
+	lc = LoopingCall(w.work())
+	lc.start(.1)
 
 	# fire reactor
 	reactor.run()

@@ -12,10 +12,14 @@ from twisted.python import log
 # twarc
 from twarc import Twarc
 
+# rq
+from rq import Queue, Connection, Worker
+
 # python modules
 import json
 import logging
 import time
+import sys
 
 # local
 import localConfig
@@ -26,7 +30,7 @@ from betweezered_app import app
 '''
 This Twisted Server wraps the following:
 	- betweezered_app - Flask app
-    - PythonRQ messaging broker
+	- PythonRQ messaging broker
 '''
 
 # global twarc instance
@@ -40,8 +44,8 @@ site = Site(resource)
 # run as script
 if __name__ == '__main__':
 
-    # betweezered_app
-    print '''
+	# betweezered_app
+	print '''
 ██████╗ ███████╗████████╗██╗    ██╗███████╗███████╗███████╗███████╗██████╗ ███████╗██████╗ 
 ██╔══██╗██╔════╝╚══██╔══╝██║    ██║██╔════╝██╔════╝╚══███╔╝██╔════╝██╔══██╗██╔════╝██╔══██╗
 ██████╔╝█████╗     ██║   ██║ █╗ ██║█████╗  █████╗    ███╔╝ █████╗  ██████╔╝█████╗  ██║  ██║
@@ -50,13 +54,16 @@ if __name__ == '__main__':
 ╚═════╝ ╚══════╝   ╚═╝    ╚══╝╚══╝ ╚══════╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
 '''
 
-    # betweezered_app
-    reactor.listenTCP(localConfig.betweezered_app_port, site, interface="::")
-    print "Listening on",localConfig.betweezered_app_port
+	# betweezered_app
+	reactor.listenTCP(localConfig.betweezered_app_port, site, interface="::")
+	print "Listening on",localConfig.betweezered_app_port
 
-    # looping listener for crumb_kafka
-    # lc = LoopingCall(crumb_kafka.crumb_kafka_looper().consume)
-    # lc.start(.1)
+	# looping listener for rq consumer
+	# with Connection():
+	# 	qs = map(Queue, sys.argv[1:]) or [Queue()]
+	# 	w = Worker(qs)
+	# 	lc = LoopingCall(w.work())
+	# 	lc.start(.1)
 
-    # fire reactor
-    reactor.run()
+	# fire reactor
+	reactor.run()

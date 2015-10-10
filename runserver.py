@@ -13,13 +13,15 @@ from twisted.python import log
 from twarc import Twarc
 
 # rq
-from rq import Queue, Connection, Worker
+from rq import Queue
+from redis import Redis
 
 # python modules
 import json
 import logging
 import time
 import sys
+import threading
 
 # local
 import localConfig
@@ -57,13 +59,6 @@ if __name__ == '__main__':
 	# betweezered_app
 	reactor.listenTCP(localConfig.betweezered_app_port, site, interface="::")
 	print "Listening on",localConfig.betweezered_app_port
-
-	# looping listener for rq consumer
-	con = Connection()
-	qs = map(Queue, sys.argv[1:]) or [Queue(connection=con.gen.next())]
-	w = Worker(qs)
-	lc = LoopingCall(w.work())
-	lc.start(.1)
 
 	# fire reactor
 	reactor.run()

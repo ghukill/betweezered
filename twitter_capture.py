@@ -6,19 +6,20 @@ from twitter_work import worker
 
 class TwitterStream(object):
 
-	def __init__(self):
+	def __init__(self, search_terms):
 		# globals to all instances
 		self.t = Twarc(localConfig.client_key, localConfig.client_secret, localConfig.access_token, localConfig.access_token_secret)
-
+		self.search_terms = search_terms
 
 	# method to capture twitter stream
-	def captureStream(self):
-		for tweet in self.t.stream('michigan'):
+	def captureStream(self):		
+		for tweet in self.t.stream(",".join(self.search_terms)):
 			worker.delay(tweet)		
 
 
 def main():
-	ts = TwitterStream()
+
+	ts = TwitterStream(localConfig.search_terms)
 	ts.captureStream()
 
 

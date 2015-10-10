@@ -6,4 +6,4 @@ redis_conn = Redis()
 # method to work
 @job('normal', connection=redis_conn, timeout=5)
 def worker(tweet):
-	print "Look what I found:",tweet['text']
+	print tweet['text']

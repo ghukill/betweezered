@@ -32,11 +32,6 @@ from betweezered_app import app
 # import workers
 import twitter_kafka
 
-'''
-This Twisted Server wraps the following:
-	- betweezered_app - Flask app
-	- PythonRQ messaging broker
-'''
 
 # global twarc instance
 t = Twarc(localConfig.client_key, localConfig.client_secret, localConfig.access_token, localConfig.access_token_secret)

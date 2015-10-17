@@ -19,4 +19,6 @@ Sitting here mulling it over, the hose might not be the right approach.
 UNLESS, each instance of betweezered can cast a net over a few search terms, 
 these are ALL captured in the same DB.  We could try to guess which term landed it, 
 but maybe we'll not know?  maybe the tweet metadata will include it?  All is not lost.
+
+Consider wrapping all this in a supervisor file?
 '''

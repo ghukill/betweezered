@@ -47,18 +47,18 @@ site = Site(resource)
 if __name__ == '__main__':
 
 	# betweezered_app
-	print '''
+	logging.info('''
 ██████╗ ███████╗████████╗██╗    ██╗███████╗███████╗███████╗███████╗██████╗ ███████╗██████╗ 
 ██╔══██╗██╔════╝╚══██╔══╝██║    ██║██╔════╝██╔════╝╚══███╔╝██╔════╝██╔══██╗██╔════╝██╔══██╗
 ██████╔╝█████╗     ██║   ██║ █╗ ██║█████╗  █████╗    ███╔╝ █████╗  ██████╔╝█████╗  ██║  ██║
 ██╔══██╗██╔══╝     ██║   ██║███╗██║██╔══╝  ██╔══╝   ███╔╝  ██╔══╝  ██╔══██╗██╔══╝  ██║  ██║
 ██████╔╝███████╗   ██║   ╚███╔███╔╝███████╗███████╗███████╗███████╗██║  ██║███████╗██████╔╝
 ╚═════╝ ╚══════╝   ╚═╝    ╚══╝╚══╝ ╚══════╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
-'''
+''')
 
 	# betweezered_app
 	reactor.listenTCP(localConfig.betweezered_app_port, site, interface="::")
-	print "Listening on",localConfig.betweezered_app_port
+	logging.info("Listening on %s" % localConfig.betweezered_app_port)
 
 	# fire reactor
 	reactor.run()

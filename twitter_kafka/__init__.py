@@ -1,7 +1,7 @@
 #crumb_kafka
 
 # python module
-import logging
+from localConfig import logging
 import json
 
 # apache kafka
@@ -24,7 +24,8 @@ class TwitterKafkaLooper(object):
 	def consume(self):
 		messages = self.consumer.fetch_messages()
 		for message in messages:
-			logging.info("Kafka message received: {msg}".format(msg=message))
+			# logging.info("Kafka message received: {msg}".format(msg=message))
+			logging.info("Kafka message received")
 			result = self.processMessage(message)
 
 
@@ -34,9 +35,7 @@ class TwitterKafkaLooper(object):
 		try:
 			# retrieve payload and parse
 			payload = json.loads(message.value)
-			logging.debug(payload)
+			logging.info(payload['text'])
 
 		except Exception, e:
-			crumb_handle.release_crumb_lock()
-			logging.debug(str(e))
-			return str(e)
+			logging.warning('could not parse text from tweet')

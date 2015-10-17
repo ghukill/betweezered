@@ -65,7 +65,7 @@ if __name__ == '__main__':
 
 	# consume betweezered kafka topic
 	lc = LoopingCall(twitter_kafka.TwitterKafkaLooper().consume)
-	lc.start(.1)
+	lc.start(1)
 
 	# fire reactor
 	reactor.run()

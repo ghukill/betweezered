@@ -123,11 +123,11 @@ class LocalStreamKafka(object):
 				time.sleep(.25)
 
 
-	# # method to capture twitter stream
-	# def burstStream(self):
-	# 	logging.debug("sending all local tweets as burst")
-	# 	for tweet in self.lt:
-	# 		tweet_process.delay(tweet)
+	# method to capture twitter stream
+	def burstStream(self):
+		logging.debug("sending all local tweets as burst")
+		for tweet_json in self.lt:
+			result = producer.send_messages("betweezered", tweet_json)
 
 
 def main():

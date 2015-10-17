@@ -4,6 +4,7 @@
 	* install flask - sqlalchemy connector
 	* reorganize file structure (e.g. twitter_kafka --> betweezer_process, twitter_capture --> betweezer_capture)
 	* create 'catch-up' module that performs search (as opposed to listen to stream), to prime or collect missed tweets from past
+	* if not running, the consumer does NOT go back and capture finish up things not yet processed.  this is big.
 
 
 ##Rambles

@@ -25,7 +25,7 @@ class TwitterKafkaLooper(object):
 		messages = self.consumer.fetch_messages()
 		for message in messages:
 			# logging.info("Kafka message received: {msg}".format(msg=message))
-			logging.info("Kafka message received")
+			logging.debug("Kafka message received")
 			result = self.processMessage(message)
 
 

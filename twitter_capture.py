@@ -77,26 +77,19 @@ class LocalStreamRQ(object):
 #--- Apache Kafka---*
 class TwitterStreamKafka(object):
 
-	pass
+	# WORKING TWITTER HOSE
+	def __init__(self, search_terms):
 
-	# # WORKING TWITTER HOSE
-	# def __init__(self, search_terms):
+		logging.info("initializing TwitterStream Kafka")
 
-	# 	logging.info("initializing TwitterStream Kafka")
+		# globals to all instances
+		self.t = Twarc(localConfig.client_key, localConfig.client_secret, localConfig.access_token, localConfig.access_token_secret)
+		self.search_terms = search_terms
 
-	# 	# globals to all instances
-	# 	self.t = Twarc(localConfig.client_key, localConfig.client_secret, localConfig.access_token, localConfig.access_token_secret)
-	# 	self.search_terms = search_terms
-
-	# # method to capture twitter stream
-	# def captureStream(self):
-	# 	fhand = open('/tmp/tweet_hose.csv','w')
-	# 	for tweet in self.t.stream(",".join(self.search_terms)):
-	# 		tweet_process.delay(tweet)
-	# 		fhand.write(json.dumps(tweet))
-	# 		fhand.write('\n')
-
-	# 	fhand.close()
+	# method to capture twitter stream
+	def captureStream(self):
+		for tweet in self.t.stream(",".join(self.search_terms)):
+			result = producer.send_messages("betweezered", json.dumps(tweet))
 
 
 
@@ -153,6 +146,8 @@ def main():
 
 	#--- Kafka Capture ---#
 	if stream_type == 'tskafka':
+		if len(sys.argv) > 2: # if search term override provided, used
+			localConfig.search_terms = [sys.argv[2]]
 		ts = TwitterStreamKafka(localConfig.search_terms)
 		ts.captureStream()
 

@@ -29,6 +29,9 @@ import localConfig
 # import crumb_http flask app
 from betweezered_app import app
 
+# import workers
+import twitter_kafka
+
 '''
 This Twisted Server wraps the following:
 	- betweezered_app - Flask app
@@ -59,6 +62,10 @@ if __name__ == '__main__':
 	# betweezered_app
 	reactor.listenTCP(localConfig.betweezered_app_port, site, interface="::")
 	logging.info("Listening on %s" % localConfig.betweezered_app_port)
+
+	# consume betweezered kafka topic
+	lc = LoopingCall(twitter_kafka.TwitterKafkaLooper().consume)
+	lc.start(.1)
 
 	# fire reactor
 	reactor.run()

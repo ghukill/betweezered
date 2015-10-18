@@ -7,6 +7,9 @@ import json
 # apache kafka
 from kafka import KafkaConsumer
 
+# bt_app
+from bt_app import db, models
+
 
 # kafka consumer
 class TwitterKafkaLooper(object):
@@ -24,7 +27,6 @@ class TwitterKafkaLooper(object):
 	def consume(self):
 		messages = self.consumer.fetch_messages()
 		for message in messages:
-			# logging.info("Kafka message received: {msg}".format(msg=message))
 			logging.debug("Kafka message received")
 			result = self.processMessage(message)
 
@@ -35,7 +37,20 @@ class TwitterKafkaLooper(object):
 		try:
 			# retrieve payload and parse
 			payload = json.loads(message.value)
-			logging.info(payload['text'])
+			logging.info("tweet text: %s" % payload['text'])
+
+			# insert into MySQL
+			try:
+				t = models.Tweet(payload)
+				db.session.add(t)
+				db.session.commit()
+				logging.debug("tweet inserted into db, id %s" % t.id)
+			except Exception, e:
+				db.session.rollback()
+				logging.warning("COULD NOT INSERT INTO DB.  Error: %s" % 	e)
+
 
 		except Exception, e:
-			logging.warning('could not parse text from tweet')
+			logging.warning(e)
+			# flush session
+

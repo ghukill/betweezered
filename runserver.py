@@ -27,10 +27,10 @@ import threading
 import localConfig
 
 # import crumb_http flask app
-from betweezered_app import app
+from bt_app import app
 
 # import workers
-import twitter_kafka
+import bt_kafka
 
 
 # global twarc instance
@@ -59,8 +59,8 @@ if __name__ == '__main__':
 	logging.info("Listening on %s" % localConfig.betweezered_app_port)
 
 	# consume betweezered kafka topic
-	lc = LoopingCall(twitter_kafka.TwitterKafkaLooper().consume)
-	lc.start(1)
+	lc = LoopingCall(bt_kafka.TwitterKafkaLooper().consume)
+	lc.start(localConfig.ts_kafka_loop_delay)
 
 	# fire reactor
 	reactor.run()

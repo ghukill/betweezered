@@ -8,7 +8,6 @@ import localConfig
 from localConfig import logging
 from twarc import Twarc
 from twisted.internet import protocol
-from twitter_work import tweet_process
 
 # Apache Kafka
 from kafka import KafkaClient, SimpleProducer	
@@ -18,28 +17,27 @@ kafka = KafkaClient("localhost:9092")
 producer = SimpleProducer(kafka)
 	
 
+# #--- Python RQ ---*
+# class TwitterStreamRQ(object):
 
-#--- Python RQ ---*
-class TwitterStreamRQ(object):
+# 	# WORKING TWITTER HOSE
+# 	def __init__(self, search_terms):
 
-	# WORKING TWITTER HOSE
-	def __init__(self, search_terms):
+# 		logging.info("initializing TwitterStream RQ")
 
-		logging.info("initializing TwitterStream RQ")
+# 		# globals to all instances
+# 		self.t = Twarc(localConfig.client_key, localConfig.client_secret, localConfig.access_token, localConfig.access_token_secret)
+# 		self.search_terms = search_terms
 
-		# globals to all instances
-		self.t = Twarc(localConfig.client_key, localConfig.client_secret, localConfig.access_token, localConfig.access_token_secret)
-		self.search_terms = search_terms
+# 	# method to capture twitter stream
+# 	def captureStream(self):
+# 		fhand = open('/tmp/tweet_hose.csv','w')
+# 		for tweet in self.t.stream(",".join(self.search_terms)):
+# 			tweet_process.delay(tweet)
+# 			fhand.write(json.dumps(tweet))
+# 			fhand.write('\n')
 
-	# method to capture twitter stream
-	def captureStream(self):
-		fhand = open('/tmp/tweet_hose.csv','w')
-		for tweet in self.t.stream(",".join(self.search_terms)):
-			tweet_process.delay(tweet)
-			fhand.write(json.dumps(tweet))
-			fhand.write('\n')
-
-		fhand.close()
+# 		fhand.close()
 
 
 
@@ -131,17 +129,17 @@ def main():
 	else:
 		stream_type = sys.argv[1]
 
-	#--- RQ Capture ---#
-	if stream_type == 'tsrq':
-		ts = TwitterStreamRQ(localConfig.search_terms)
-		ts.captureStream()
+	# #--- RQ Capture ---#
+	# if stream_type == 'tsrq':
+	# 	ts = TwitterStreamRQ(localConfig.search_terms)
+	# 	ts.captureStream()
 
-	if stream_type == 'ltrq':
-		lt = LocalStreamRQ(localConfig.search_terms)
-		if sys.argv[2] == "burst":
-			lt.burstStream()	
-		if sys.argv[2] == "stream":
-			lt.captureStream()
+	# if stream_type == 'ltrq':
+	# 	lt = LocalStreamRQ(localConfig.search_terms)
+	# 	if sys.argv[2] == "burst":
+	# 		lt.burstStream()	
+	# 	if sys.argv[2] == "stream":
+	# 		lt.captureStream()
 
 
 	#--- Kafka Capture ---#

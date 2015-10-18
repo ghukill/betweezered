@@ -6,7 +6,7 @@ import time
 
 # local
 import localConfig
-from betweezered_app import app
+from bt_app import app
 
 
 # write crumb

@@ -22,6 +22,10 @@ engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'], convert_unicode=Tr
 metadata = MetaData(bind=engine)
 db_con = engine.connect()
 
+
+def migrateDB():
+	db.create_all()
+
 # get handlers
 import views
 import models

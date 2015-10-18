@@ -18,3 +18,5 @@
 	*Consider wrapping all this in a supervisor file?
 
 	*Consider removing 'twitter_work', hich is primarily python RQ.  Kafka is great.  Embrace.
+
+	* could pretty easily normalize, but if end goal is spreadsheets, maybe easy to leave flat?

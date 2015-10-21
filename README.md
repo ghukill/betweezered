@@ -4,6 +4,8 @@ Application / Ecosystem to filter streaming twitter api, capture, parse, and pre
 
 ## Requirements
 
+* Install Apache Kafka
+  * <a href="http://kafka.apache.org/downloads.html">download Apache Kafka</a>
 * Python dev libraries
   * <em>sudo apt-get install python-dev</em>
 * Python MySQLdb drivers
@@ -22,20 +24,16 @@ Application / Ecosystem to filter streaming twitter api, capture, parse, and pre
 ## Run
 
 ### Apache Kafka
-* <a href="http://kafka.apache.org/downloads.html">download Apache Kafka</a>
-
 * start Apache Zookeeper
- * <em>nohup bin/zookeeper-server-start.sh config/zookeeper.properties > zookeeper.out &</em>
-
+  * <em>nohup bin/zookeeper-server-start.sh config/zookeeper.properties > zookeeper.out &</em>
 * start Kafka Server
- * <em>nohup bin/kafka-server-start.sh config/server.properties > kafka_server.out &</em>
-
+  * <em>nohup bin/kafka-server-start.sh config/server.properties > kafka_server.out &</em>
 * create Kafka topic
- * <em>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic betweezered</em>
+  * <em>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic betweezered</em>
 
 
 ### start capture
-* python twitter_capture.py tskafka
+* <em>python twitter_capture.py tskafka</em>
 
 ### start betweezered app (consumes and archives)
-* python runserver.py
+* <em>python runserver.py</em>

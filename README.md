@@ -4,16 +4,18 @@ Application / Ecosystem to filter streaming twitter api, capture, parse, and pre
 
 ## Requirements
 
-* python installs
- * Requires python dev libraries <em>sudo apt-get install python-dev</em>
- * python mysql <em>sudo apt-get install python-mysqldb</em>
- * <em>sudo pip install -r requirements.txt</em>
- * Create MySQL database
+* Python dev libraries
+  * <em>sudo apt-get install python-dev</em>
+* Python MySQLdb drivers
+  * <em>sudo apt-get install python-mysqldb</em>
+* Install requirements via pip
+  * <em>sudo pip install -r requirements.txt</em>
+* Create MySQL database
   * <em>CREATE DATABASE betweezered</em>
   * <em>CREATE USER 'betweezered'@'localhost' IDENTIFIED BY 'betweezered';</em>
   * <em>GRANT ALL PRIVILEGES ON betweezered . * TO 'betweezered'@'localhost';</em>
- * Create tables via python models
-  * 
+* Create tables via python models
+  * <em>python create_tables.py</em>
 
 
 

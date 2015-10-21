@@ -1,6 +1,6 @@
 twarc
 flask
 twisted
-python-kafka
+kafka-python
 sqlalchemy
-flask.ext.sqlalchemy
+Flask-SQLAlchemy

@@ -12,10 +12,6 @@ from twisted.python import log
 # twarc
 from twarc import Twarc
 
-# rq
-from rq import Queue
-from redis import Redis
-
 # python modules
 import json
 import logging

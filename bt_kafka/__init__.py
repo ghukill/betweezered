@@ -47,7 +47,7 @@ class TwitterKafkaLooper(object):
 				logging.debug("tweet inserted into db, id %s" % t.id)
 			except Exception, e:
 				db.session.rollback()
-				logging.warning("COULD NOT INSERT INTO DB.  Error: %s" % e)
+				logging.warning("could not insert into db.  error: %s" % e)
 
 
 		except Exception, e:

@@ -2,5 +2,5 @@ twarc
 flask
 twisted
 kafka-python
-sqlalchemy
-Flask-SQLAlchemy
+pymongo
+mongoengine

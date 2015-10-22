@@ -8,17 +8,8 @@ Application / Ecosystem to filter streaming twitter api, capture, parse, and pre
   * <a href="http://kafka.apache.org/downloads.html">download Apache Kafka</a>
 * Python dev libraries
   * <em>sudo apt-get install python-dev</em>
-* Python MySQLdb drivers
-  * <em>sudo apt-get install python-mysqldb</em>
 * Install requirements via pip
   * <em>sudo pip install -r requirements.txt</em>
-* Create MySQL database
-  * <em>CREATE DATABASE betweezered</em>
-  * <em>CREATE USER 'betweezered'@'localhost' IDENTIFIED BY 'betweezered';</em>
-  * <em>GRANT ALL PRIVILEGES ON betweezered . * TO 'betweezered'@'localhost';</em>
-* Create tables via python models
-  * <em>python create_tables.py</em>
-
 
 
 ## Run

@@ -55,8 +55,9 @@ if __name__ == '__main__':
 	logging.info("Listening on %s" % localConfig.betweezered_app_port)
 
 	# consume betweezered kafka topic
-	lc = LoopingCall(bt_kafka.TwitterKafkaLooper().consume)
-	lc.start(localConfig.ts_kafka_loop_delay)
+	if localConfig.ts_kafka_consume == True:
+		lc = LoopingCall(bt_kafka.TwitterKafkaLooper().consume)
+		lc.start(localConfig.ts_kafka_loop_delay)
 
 	# fire reactor
 	reactor.run()

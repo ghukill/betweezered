@@ -20,3 +20,18 @@
 	*Consider removing 'twitter_work', hich is primarily python RQ.  Kafka is great.  Embrace.
 
 	* could pretty easily normalize, but if end goal is spreadsheets, maybe easy to leave flat?
+
+	* put mongo db connection somewhere central, better yet, create models yo!
+
+
+## Removed from requirements when leaving SQL
+sqlalchemy
+Flask-SQLAlchemy
+* Python MySQLdb drivers
+  * <em>sudo apt-get install python-mysqldb</em>
+* Create MySQL database
+  * <em>CREATE DATABASE betweezered</em>
+  * <em>CREATE USER 'betweezered'@'localhost' IDENTIFIED BY 'betweezered';</em>
+  * <em>GRANT ALL PRIVILEGES ON betweezered . * TO 'betweezered'@'localhost';</em>
+* Create tables via python models
+  * <em>python create_tables.py</em>

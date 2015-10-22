@@ -1,4 +1,4 @@
-#crumb_kafka
+#bt_kafka
 
 # python module
 from localConfig import logging
@@ -8,8 +8,7 @@ import json
 from kafka import KafkaConsumer
 
 # bt_app
-from bt_app import db, models
-
+from bt_app import models
 
 # kafka consumer
 class TwitterKafkaLooper(object):
@@ -39,18 +38,20 @@ class TwitterKafkaLooper(object):
 			payload = json.loads(message.value)
 			logging.info("tweet text: %s" % payload['text'])
 
-			# insert into MySQL
+			# insert into MongoDB
 			try:
-				t = models.Tweet(payload)
-				db.session.add(t)
-				db.session.commit()
-				logging.debug("tweet inserted into db, id %s" % t.id)
-			except Exception, e:
-				db.session.rollback()
+				# insert tweet into Mongo
+				payload['id'] = str(payload['id']) # convert id to string
+				tweet = models.MongoTweet(**payload)
+				tweet.save()														
+				logging.info("tweet inserted into db, id %s" % tweet.id)
+
+			except Exception, e:				
 				logging.warning("could not insert into db.  error: %s" % e)
 
 
 		except Exception, e:
 			logging.warning(e)
 			# flush session
+
 

@@ -14,6 +14,14 @@ from bt_app import app, models
 @app.route("{prefix}/tweets/<limit>".format(prefix=localConfig.betweezered_app_prefix), methods=['GET', 'POST'])
 def tweet(limit):
 
+	renderdict = {}
+
 	# return tweet json
-	tweets = models.MongoTweet.objects().limit(int(limit))
-	return render_template('tweets.htm',tweets=tweets)
+	renderdict['tweets'] = models.MongoTweet.objects().limit(int(limit))
+	renderdict['count'] = models.MongoTweet.objects.count()
+	renderdict['limit'] = limit
+
+	# add search terms
+	renderdict['search_terms'] = localConfig.search_terms
+
+	return render_template('tweets.htm',renderdict=renderdict)

@@ -7,7 +7,7 @@ from localConfig import logging
 
 # mongo
 from mongoengine import *
-connect('betweezered')
+connect('twitterapology')
 
 # MongoDB
 class MongoTweet(DynamicDocument):

@@ -1,3 +1,4 @@
 localConfig.py
 *.pyc
 *.out
+*.pid

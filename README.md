@@ -20,6 +20,6 @@ Betweezered runs with the help of supervisor, which starts the following:<br>
 * Twitter Stream capture (twitter_capture.py)
 * Betweezered Server
 
-`<em>supervisord -c sup_conf.conf</em>`
+`supervisord -c sup_conf.conf`
 
 Betweezered's components can be viewed with the supervisor web console at: `localhost:9001`

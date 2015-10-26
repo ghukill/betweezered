@@ -14,17 +14,12 @@ Application / Ecosystem to filter streaming twitter api, capture, parse, and pre
 
 ## Run
 
-### Apache Kafka
-* start Apache Zookeeper
-  * <em>nohup bin/zookeeper-server-start.sh config/zookeeper.properties > zookeeper.out &</em>
-* start Kafka Server
-  * <em>nohup bin/kafka-server-start.sh config/server.properties > kafka_server.out &</em>
-* create Kafka topic
-  * <em>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic betweezered</em>
+Betweezered runs with the help of supervisor, which starts the following:<br>
+* Apache Zookeeper
+* Apache Kafka server
+* Twitter Stream capture (twitter_capture.py)
+* Betweezered Server
 
+<em>supervisord -c sup_conf.conf</em>
 
-### start capture
-* <em>python twitter_capture.py tskafka</em>
-
-### start betweezered app (consumes and archives)
-* <em>python runserver.py</em>
+Betweezered's components can be viewed with the supervisor web console at: localhost:9001
